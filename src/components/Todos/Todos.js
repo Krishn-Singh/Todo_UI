@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { API_ROUTES } from '../Constant';
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -8,7 +9,7 @@ const Todos = () => {
 
   useEffect(() => {
     // Fetch todos from the server
-    axios.get('http://localhost:8080/api/v1/getTodo')
+    axios.get(`${API_ROUTES}/api/v1/getTodo`)
       .then(response => 
         setTodos(response.data.data)
         )
@@ -18,7 +19,7 @@ const Todos = () => {
   const addTodo = () => {
     console.log('Adding Todo:', newTodoTitle, newTodoDescription);
     // Add a new todo
-    axios.post('http://localhost:8080/api/v1/createTodo', { title: newTodoTitle, description: newTodoDescription })
+    axios.post(`${API_ROUTES}/api/v1/createTodo`, { title: newTodoTitle, description: newTodoDescription })
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodoTitle('');
